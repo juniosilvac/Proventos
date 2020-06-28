@@ -6,6 +6,6 @@ namespace Proventos.Core.Interfaces
 {
     public interface IRepository<T> : IDisposable where T : class
     {
-        Task<IEnumerable<T>> GetAsync(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
     }
 }

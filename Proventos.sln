@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5F56BCFC-628
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proventos.Core", "src\Proventos.Core\Proventos.Core.csproj", "{861FC266-91CD-4517-8537-EC47A1D99689}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proventos.Infrastructure", "src\Proventos.Infrastructure\Proventos.Infrastructure.csproj", "{D3E97F12-C07C-45A7-AE0A-6E21B4517367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{861FC266-91CD-4517-8537-EC47A1D99689}.Release|x64.Build.0 = Release|Any CPU
 		{861FC266-91CD-4517-8537-EC47A1D99689}.Release|x86.ActiveCfg = Release|Any CPU
 		{861FC266-91CD-4517-8537-EC47A1D99689}.Release|x86.Build.0 = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|x64.Build.0 = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Debug|x86.Build.0 = Debug|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x64.ActiveCfg = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x64.Build.0 = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x86.ActiveCfg = Release|Any CPU
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{861FC266-91CD-4517-8537-EC47A1D99689} = {5F56BCFC-628B-4267-B121-D6B9BC26EA53}
+		{D3E97F12-C07C-45A7-AE0A-6E21B4517367} = {5F56BCFC-628B-4267-B121-D6B9BC26EA53}
 	EndGlobalSection
 EndGlobal
