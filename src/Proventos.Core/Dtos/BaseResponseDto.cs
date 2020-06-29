@@ -7,10 +7,10 @@ namespace Proventos.Core.Dtos
     {
         public BaseResponseDto()
         {
-            Erros = new List<string>();
+            Errors = new List<string>();
         }
-        public bool HasError => Erros.Any();
-        public List<string> Erros {get; set;}
+        public bool HasError => Errors.Any();
+        public List<string> Errors {get; set;}
         public int Total {get; set;}
         public T Data {get; set;}        
     }

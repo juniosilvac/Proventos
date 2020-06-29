@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proventos.Core", "src\Prove
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proventos.Infrastructure", "src\Proventos.Infrastructure\Proventos.Infrastructure.csproj", "{D3E97F12-C07C-45A7-AE0A-6E21B4517367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proventos.Api", "src\Proventos.Api\Proventos.Api.csproj", "{409E36B4-DAE6-4C54-9C70-2E220F812438}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x64.Build.0 = Release|Any CPU
 		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3E97F12-C07C-45A7-AE0A-6E21B4517367}.Release|x86.Build.0 = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|x64.Build.0 = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Debug|x86.Build.0 = Debug|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|x64.ActiveCfg = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|x64.Build.0 = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|x86.ActiveCfg = Release|Any CPU
+		{409E36B4-DAE6-4C54-9C70-2E220F812438}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{861FC266-91CD-4517-8537-EC47A1D99689} = {5F56BCFC-628B-4267-B121-D6B9BC26EA53}
 		{D3E97F12-C07C-45A7-AE0A-6E21B4517367} = {5F56BCFC-628B-4267-B121-D6B9BC26EA53}
+		{409E36B4-DAE6-4C54-9C70-2E220F812438} = {5F56BCFC-628B-4267-B121-D6B9BC26EA53}
 	EndGlobalSection
 EndGlobal

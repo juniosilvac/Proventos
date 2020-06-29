@@ -7,7 +7,7 @@ using Proventos.Core.Dtos.Requests;
 
 namespace Proventos.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/proventos")]
     [ApiController]
     public class ProventosController : ControllerBase
     {
