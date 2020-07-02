@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proventos.Core.Dtos;
 using Proventos.Core.Dtos.Requests;
@@ -9,6 +10,7 @@ namespace Proventos.Api.Controllers
 {
     [Route("v1/proventos")]
     [ApiController]
+    [Authorize]
     public class ProventosController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,7 +21,7 @@ namespace Proventos.Api.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("")]       
         public async Task<ActionResult<List<ProventoDto>>> Get()
         {
             var obterProventosRequest = await _mediator.Send(new ObterProventosRequest());

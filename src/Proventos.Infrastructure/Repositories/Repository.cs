@@ -54,6 +54,11 @@ namespace Proventos.Infrastructure.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
+        public async Task<T> FindWhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).FirstOrDefaultAsync();
+        }
+
         public async Task<T> GetAsync(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
