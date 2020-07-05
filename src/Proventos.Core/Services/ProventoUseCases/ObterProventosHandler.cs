@@ -2,8 +2,10 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Proventos.Core.Dtos;
 using Proventos.Core.Dtos.Requests;
+using Proventos.Core.Extensions;
 using Proventos.Core.Interfaces;
 using Proventos.Core.Models;
+using Proventos.Core.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,8 +57,8 @@ namespace Proventos.Core.Services.ProventoUseCases
                     Aprovacao = DateTime.UtcNow,
                     Preco = decimal.Round(1,2),
                     ProventoPorUnidade = 1,
-                    TipoAtivo = "ON",
-                    TipoProvento = "JRS CAP PROPRIO",
+                    TipoAtivo =  TipoAtivo.ON.GetDescription(),
+                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
                     Valor = decimal.Round(1,2),
                     CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
                     {
@@ -72,8 +74,8 @@ namespace Proventos.Core.Services.ProventoUseCases
                     Aprovacao = DateTime.UtcNow,
                     Preco = decimal.Round(1,2),
                     ProventoPorUnidade = 1,
-                    TipoAtivo = "ON",
-                    TipoProvento = "JRS CAP PROPRIO",
+                    TipoAtivo = TipoAtivo.ON.GetDescription(),
+                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
                     Valor = decimal.Round(1,2),
                     CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
                     {
@@ -89,8 +91,8 @@ namespace Proventos.Core.Services.ProventoUseCases
                     Aprovacao = DateTime.UtcNow,
                     Preco = decimal.Round(1,2),
                     ProventoPorUnidade = 1,
-                    TipoAtivo = "ON",
-                    TipoProvento = "JRS CAP PROPRIO",
+                    TipoAtivo = TipoAtivo.ON.GetDescription(),
+                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
                     Valor = decimal.Round(1,2),
                     CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
                     {
@@ -106,8 +108,8 @@ namespace Proventos.Core.Services.ProventoUseCases
                     Aprovacao = DateTime.UtcNow,
                     Preco = decimal.Round(1,2),
                     ProventoPorUnidade = 1,
-                    TipoAtivo = "ON",
-                    TipoProvento = "DIVIDENDO",
+                    TipoAtivo = TipoAtivo.ON.GetDescription(),
+                    TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
                     Valor =decimal.Round(1,2),
                     CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
                     {
@@ -123,8 +125,8 @@ namespace Proventos.Core.Services.ProventoUseCases
                     Aprovacao = DateTime.UtcNow,
                     Preco = decimal.Round(1,2),
                     ProventoPorUnidade = 1,
-                    TipoAtivo = "ON",
-                    TipoProvento = "DIVIDENDO",
+                    TipoAtivo = TipoAtivo.ON.GetDescription(),
+                    TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
                     Valor = decimal.Round(1,2),
                     CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
                     {
