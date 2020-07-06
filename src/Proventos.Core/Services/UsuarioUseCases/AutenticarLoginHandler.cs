@@ -30,25 +30,25 @@ namespace Proventos.Core.Services.UsuarioUseCases
 
             try
             {
-                //if(string.IsNullOrEmpty(request.Login) || string.IsNullOrEmpty(request.Senha))
-                //{
-                //    response.Errors.Add(messageUserInvalid);
-                //    return response;
-                //}
-
-                //var login = await _repository.FindWhereAsync(p => p.Login == request.Login && p.Senha == request.Senha);
-
-                //if (login == default)
-                //{
-                //    response.Errors.Add(messageUserInvalid);
-                //    return response;
-                //}
-
-                var login = new Usuario()
+                if (string.IsNullOrEmpty(request.Login) || string.IsNullOrEmpty(request.Senha))
                 {
-                    Id = Guid.NewGuid(),
-                    Login = "user.api"
-                };
+                    response.Errors.Add(messageUserInvalid);
+                    return response;
+                }
+
+                var login = await _repository.FindWhereAsync(p => p.Login == request.Login && p.Senha == request.Senha);
+
+                if (login == default)
+                {
+                    response.Errors.Add(messageUserInvalid);
+                    return response;
+                }
+
+                //var login = new Usuario()
+                //{
+                //    Id = Guid.NewGuid(),
+                //    Login = "user.api"
+                //};
 
                 response.Data = await _jwtFactory.GenerateEncodedToken(login.Id.ToString(), login.Login);
             }
