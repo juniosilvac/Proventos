@@ -1,3 +1,4 @@
+using Proventos.Core.Models.Enums;
 using System;
 
 namespace Proventos.Core.Dtos
@@ -12,8 +13,10 @@ namespace Proventos.Core.Dtos
         public decimal Valor { get; set; }
         public decimal Preco { get; set; }
         public int ProventoPorUnidade { get; set; }
-        public string TipoAtivo { get; set; }
-        public string TipoProvento { get; set; }
+        public TipoAtivo  TipoAtivo { get; set; }
+        public TipoProvento TipoProvento { get; set; }
+
+        public Guid CotacaoPorLoteMilId { get; set; }
 
         public CotacaoPorLoteMilDto CotacaoPorLoteMilDto { get; set; }
     }

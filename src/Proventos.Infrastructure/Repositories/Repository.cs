@@ -10,7 +10,7 @@ using Proventos.Infrastructure.Contexts;
 
 namespace Proventos.Infrastructure.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : EntityBase
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly AppDbContext _context;
         private DbSet<T> _dbSet;

@@ -5,15 +5,16 @@ namespace Proventos.Infrastructure.Contexts
 {
     public class AppDbContext : DbContext
     {
+
+        public AppDbContext()
+        {
+        }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {            
         }
 
-        public DbSet<Provento> Proventos { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
+        public DbSet<Provento> Provento { get; set; }
+        public DbSet<CotacaoPorLoteMil> CotacaoPorLoteMil { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }

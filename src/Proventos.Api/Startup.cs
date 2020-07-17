@@ -87,9 +87,10 @@ namespace Proventos.Api
             });
 
             services.AddControllers();
-
-            //Infrastructure
-            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("TestDB"));
+            
+            //Infrastructure            
+            var connection = Configuration["MySqlConnection:MySqlConnectionString"];
+            services.AddDbContext<AppDbContext>(options => options.UseMySql(connection));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IJwtFactory), typeof(JwtFactory));
 

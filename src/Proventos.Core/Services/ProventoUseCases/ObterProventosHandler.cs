@@ -16,12 +16,14 @@ namespace Proventos.Core.Services.ProventoUseCases
 {
     public class ObterProventosHandler : IRequestHandler<ObterProventosRequest, BaseResponseDto<List<ProventoDto>>>
     {
-        private readonly IRepository<Provento> _repository;
+        private readonly IRepository<Provento> _repoProvento;
+        private readonly IRepository<CotacaoPorLoteMil> _repoCotacaoPorLoteMil;
         private readonly ILogger<ObterProventosHandler> _logger;
 
-        public ObterProventosHandler(IRepository<Provento> repository, ILogger<ObterProventosHandler> logger)
+        public ObterProventosHandler(IRepository<Provento> repoProvento, IRepository<CotacaoPorLoteMil> repoCotacaoPorLoteMil, ILogger<ObterProventosHandler> logger)
         {
-            _repository = repository;
+            _repoProvento = repoProvento;
+            _repoCotacaoPorLoteMil = repoCotacaoPorLoteMil;
             _logger = logger;
         }
         public async Task<BaseResponseDto<List<ProventoDto>>> Handle(ObterProventosRequest request, CancellationToken cancellationToken)
@@ -29,14 +31,37 @@ namespace Proventos.Core.Services.ProventoUseCases
             var response = new BaseResponseDto<List<ProventoDto>>();
             try
             {
-                var proventos = (await _repository.GetAllAsync()).Select(p => new ProventoDto
+                var proventos = (await _repoProvento.GetAllAsync()).Select(p => new ProventoDto
                 {
                     Aprovacao = p.Aprovacao,
                     Preco = p.Preco,
                     ProventoPorUnidade = p.ProventoPorUnidade,
-                    Valor = p.Valor
+                    Valor = p.Valor,
+                    TipoProvento = (TipoProvento)p.TipoProventoId,
+                    TipoAtivo = (TipoAtivo)p.TipoAtivoId,
+                    CotacaoPorLoteMilId = p.CotacaoPorLoteMilId
+                   
                 }).ToList();
-                response.Data = CarregarProventos();//proventos;                      
+
+                var cotacoes = (await _repoCotacaoPorLoteMil.GetAllAsync()).Select(p => new CotacaoPorLoteMilDto
+                {
+                    PrecoPorUnidade = p.PrecoPorUnidade,
+                    UltimoDia = p.UltimoDia,
+                    UltimoDiaPreco = p.UltimoDiaPreco,
+                    UltimoPreco = p.UltimoPreco,
+                    Id = p.Id
+
+                }).ToList();
+
+                proventos.ForEach(p =>
+                {
+                    var cotacao = cotacoes.Find(c => c.Id == p.CotacaoPorLoteMilId);
+                    if(cotacao != default)
+                    {
+                        p.CotacaoPorLoteMilDto = cotacao;                       
+                    }                    
+                });
+                response.Data = proventos;                      
 
             }
             catch (Exception ex)
@@ -48,96 +73,96 @@ namespace Proventos.Core.Services.ProventoUseCases
             return response;
         }
 
-        public List<ProventoDto> CarregarProventos()
-        {
-            return new List<ProventoDto>()
-            {
-                new ProventoDto()
-                {
-                    Aprovacao = DateTime.UtcNow,
-                    Preco = decimal.Round(1,2),
-                    ProventoPorUnidade = 1,
-                    TipoAtivo =  TipoAtivo.ON.GetDescription(),
-                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
-                    Valor = decimal.Round(1,2),
-                    CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
-                    {
-                        PrecoPorUnidade = 1,
-                        UltimoDia = DateTime.UtcNow,
-                        UltimoDiaPreco = DateTime.UtcNow,
-                        UltimoPreco = decimal.Round(1,2),
-                    }
+        //public List<ProventoDto> CarregarProventos()
+        //{
+        //    return new List<ProventoDto>()
+        //    {
+        //        new ProventoDto()
+        //        {
+        //            Aprovacao = DateTime.UtcNow,
+        //            Preco = decimal.Round(1,2),
+        //            ProventoPorUnidade = 1,
+        //            TipoAtivo =  TipoAtivo.ON.GetDescription(),
+        //            TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
+        //            Valor = decimal.Round(1,2),
+        //            CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
+        //            {
+        //                PrecoPorUnidade = 1,
+        //                UltimoDia = DateTime.UtcNow,
+        //                UltimoDiaPreco = DateTime.UtcNow,
+        //                UltimoPreco = decimal.Round(1,2),
+        //            }
 
-                },
-                new ProventoDto()
-                {
-                    Aprovacao = DateTime.UtcNow,
-                    Preco = decimal.Round(1,2),
-                    ProventoPorUnidade = 1,
-                    TipoAtivo = TipoAtivo.ON.GetDescription(),
-                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
-                    Valor = decimal.Round(1,2),
-                    CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
-                    {
-                        PrecoPorUnidade = 1,
-                        UltimoDia = DateTime.UtcNow,
-                        UltimoDiaPreco = DateTime.UtcNow,
-                        UltimoPreco = decimal.Round(1,2),
-                    }
+        //        },
+        //        new ProventoDto()
+        //        {
+        //            Aprovacao = DateTime.UtcNow,
+        //            Preco = decimal.Round(1,2),
+        //            ProventoPorUnidade = 1,
+        //            TipoAtivo = TipoAtivo.ON.GetDescription(),
+        //            TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
+        //            Valor = decimal.Round(1,2),
+        //            CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
+        //            {
+        //                PrecoPorUnidade = 1,
+        //                UltimoDia = DateTime.UtcNow,
+        //                UltimoDiaPreco = DateTime.UtcNow,
+        //                UltimoPreco = decimal.Round(1,2),
+        //            }
 
-                },
-                new ProventoDto()
-                {
-                    Aprovacao = DateTime.UtcNow,
-                    Preco = decimal.Round(1,2),
-                    ProventoPorUnidade = 1,
-                    TipoAtivo = TipoAtivo.ON.GetDescription(),
-                    TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
-                    Valor = decimal.Round(1,2),
-                    CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
-                    {
-                        PrecoPorUnidade = 1,
-                        UltimoDia = DateTime.UtcNow,
-                        UltimoDiaPreco = DateTime.UtcNow,
-                        UltimoPreco = decimal.Round(1,2),
-                    }
+        //        },
+        //        new ProventoDto()
+        //        {
+        //            Aprovacao = DateTime.UtcNow,
+        //            Preco = decimal.Round(1,2),
+        //            ProventoPorUnidade = 1,
+        //            TipoAtivo = TipoAtivo.ON.GetDescription(),
+        //            TipoProvento = TipoProvento.JRSCAPPROPRIO.GetDescription(),
+        //            Valor = decimal.Round(1,2),
+        //            CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
+        //            {
+        //                PrecoPorUnidade = 1,
+        //                UltimoDia = DateTime.UtcNow,
+        //                UltimoDiaPreco = DateTime.UtcNow,
+        //                UltimoPreco = decimal.Round(1,2),
+        //            }
 
-                },
-                new ProventoDto()
-                {
-                    Aprovacao = DateTime.UtcNow,
-                    Preco = decimal.Round(1,2),
-                    ProventoPorUnidade = 1,
-                    TipoAtivo = TipoAtivo.ON.GetDescription(),
-                    TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
-                    Valor =decimal.Round(1,2),
-                    CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
-                    {
-                        PrecoPorUnidade = 1,
-                        UltimoDia = DateTime.UtcNow,
-                        UltimoDiaPreco = DateTime.UtcNow,
-                        UltimoPreco = decimal.Round(1,2),
-                    }
+        //        },
+        //        new ProventoDto()
+        //        {
+        //            Aprovacao = DateTime.UtcNow,
+        //            Preco = decimal.Round(1,2),
+        //            ProventoPorUnidade = 1,
+        //            TipoAtivo = TipoAtivo.ON.GetDescription(),
+        //            TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
+        //            Valor =decimal.Round(1,2),
+        //            CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
+        //            {
+        //                PrecoPorUnidade = 1,
+        //                UltimoDia = DateTime.UtcNow,
+        //                UltimoDiaPreco = DateTime.UtcNow,
+        //                UltimoPreco = decimal.Round(1,2),
+        //            }
 
-                },
-                new ProventoDto()
-                {
-                    Aprovacao = DateTime.UtcNow,
-                    Preco = decimal.Round(1,2),
-                    ProventoPorUnidade = 1,
-                    TipoAtivo = TipoAtivo.ON.GetDescription(),
-                    TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
-                    Valor = decimal.Round(1,2),
-                    CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
-                    {
-                        PrecoPorUnidade = 1,
-                        UltimoDia = DateTime.UtcNow,
-                        UltimoDiaPreco = DateTime.UtcNow,
-                        UltimoPreco = decimal.Round(1,2),
-                    }
+        //        },
+        //        new ProventoDto()
+        //        {
+        //            Aprovacao = DateTime.UtcNow,
+        //            Preco = decimal.Round(1,2),
+        //            ProventoPorUnidade = 1,
+        //            TipoAtivo = TipoAtivo.ON.GetDescription(),
+        //            TipoProvento = TipoProvento.DIVIDENDO.GetDescription(),
+        //            Valor = decimal.Round(1,2),
+        //            CotacaoPorLoteMilDto = new CotacaoPorLoteMilDto()
+        //            {
+        //                PrecoPorUnidade = 1,
+        //                UltimoDia = DateTime.UtcNow,
+        //                UltimoDiaPreco = DateTime.UtcNow,
+        //                UltimoPreco = decimal.Round(1,2),
+        //            }
 
-                }
-            };
-        }
+        //        }
+        //    };
+        //}
     }
 }
